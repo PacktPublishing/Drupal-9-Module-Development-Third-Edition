@@ -1,0 +1,35 @@
+chapter: "chapter2"
+drupal:
+  root: "build"
+  base_url: "http://nginx"
+  database:
+    host: "mariadb"
+    port: "3306"
+    name: "drupal"
+    user: "drupal"
+    password: "drupal"
+  post_install:
+    - "./vendor/bin/drush cr"
+  settings:
+    settings:
+      file_scan_ignore_directories:
+        - "vendor"
+        - "${drupal.root}"
+
+selenium:
+  host: "http://selenium:4444"
+  browser: "chrome"
+
+commands:
+  drupal:module-setup:
+    - { task: "symlink", from: "../../../packt/${chapter}", to: "${drupal.root}/modules/custom/packt" }
+  drupal:site-setup:
+    - { task: "run", command: "drupal:settings-setup" }
+    - { task: "run", command: "setup:phpunit" }
+    - { task: "run", command: "drupal:module-setup" }
+  setup:phpunit:
+    - { task: "process", source: "phpunit.xml.dist", destination: "phpunit.xml" }
+  drupal:phpcs:
+    - "phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,css,info --ignore=vendor,build ."
+  drupal:phpcbf:
+    - "phpcbf --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,css,info --ignore=vendor,build ."
