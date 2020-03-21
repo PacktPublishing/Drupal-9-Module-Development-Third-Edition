@@ -21,8 +21,6 @@ before_install:
 
 install:
   - docker-compose exec -u root php composer install
-  # Temporarily remove the admin_toolbar_search submodule due to lack of compatibility.
-  - docker-compose exec -u root php rm -rf build/modules/contrib/admin_toolbar/admin_toolbar_search
   - docker-compose exec -u root php chown -R www-data:www-data build
 
 before_script:

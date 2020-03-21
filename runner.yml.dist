@@ -27,6 +27,8 @@ commands:
     - { task: "run", command: "drupal:settings-setup" }
     - { task: "run", command: "setup:phpunit" }
     - { task: "run", command: "drupal:module-setup" }
+    # Temporarily remove a non-supported contrib submodule.
+    - { task: "remove", file: "build/modules/contrib/admin_toolbar/admin_toolbar_search" }
   setup:phpunit:
     - { task: "process", source: "phpunit.xml.dist", destination: "phpunit.xml" }
   drupal:phpcs:
