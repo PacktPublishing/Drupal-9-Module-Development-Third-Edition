@@ -1,0 +1,10 @@
+services:
+  hello_world.salutation:
+    class: Drupal\hello_world\HelloWorldSalutation
+    arguments: ['@config.factory', '@event_dispatcher']
+  hello_world.redirect_subscriber:
+    class: \Drupal\hello_world\EventSubscriber\HelloWorldRedirectSubscriber
+    arguments: ['@current_user', '@current_route_match']
+    tags:
+      - { name: event_subscriber }
+
