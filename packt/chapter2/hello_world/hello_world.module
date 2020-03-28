@@ -5,7 +5,6 @@
  * Hello World module file.
  */
 
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
