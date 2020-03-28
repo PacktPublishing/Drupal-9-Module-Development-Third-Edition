@@ -28,6 +28,10 @@ Once that is done, you can run the following command to symlink the right module
 $ docker-compose exec php ./vendor/bin/run drupal:module-setup
 ```
 
+## Mails
+
+All outgoing sent using the native PHP mailer are caught using Mailhog. You can access the emails at [http://localhost:8025](http://localhost:8025).
+
 ## Tests
 
 Run tests as follows:

@@ -22,11 +22,3 @@ function hello_world_help($route_name, RouteMatchInterface $route_match) {
     default:
   }
 }
-
-/**
- * Implements hook_form_FORM_ID_alter().
- */
-function my_module_form_salutation_configuration_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  // Perform alterations.
-  $form['#submit'][] = 'hello_world_salutation_configuration_form_submit';
-}

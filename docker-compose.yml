@@ -21,6 +21,7 @@ services:
       DB_PASSWORD: drupal
       DB_NAME: drupal
       DB_DRIVER: mysql
+      PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
     volumes:
       - ./:/var/www/html
 
@@ -58,3 +59,8 @@ services:
     - '5900:5900'
     volumes:
     - /dev/shm:/dev/shm
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 8025:8025
