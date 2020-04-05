@@ -1,7 +1,5 @@
 # Drupal 9 Module Development
 
-
-
 ## Setup
 
 To set up a local development environment, perform the following:

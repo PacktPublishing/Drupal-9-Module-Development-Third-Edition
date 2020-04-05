@@ -1,0 +1,9 @@
+hello_world.page:
+  route_name: hello_world.hello
+  title: 'Hello World'
+  base_route: hello_world.hello
+hello_world.config:
+  route_name: hello_world.greeting_form
+  title: 'Configuration'
+  base_route: hello_world.hello
+  weight: 100

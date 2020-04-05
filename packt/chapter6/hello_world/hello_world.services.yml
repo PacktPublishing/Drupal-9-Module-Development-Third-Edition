@@ -1,0 +1,21 @@
+services:
+  hello_world.salutation:
+    class: Drupal\hello_world\HelloWorldSalutation
+    arguments: ['@config.factory', '@event_dispatcher']
+  hello_world.redirect_subscriber:
+    class: \Drupal\hello_world\EventSubscriber\HelloWorldRedirectSubscriber
+    arguments: ['@current_user', '@current_route_match']
+    tags:
+      - { name: event_subscriber }
+  hello_world.logger.channel.hello_world:
+    parent: logger.channel_base
+    arguments: ['hello_world']
+  hello_world.logger.mail_logger:
+    class: Drupal\hello_world\Logger\MailLogger
+    arguments: ['@logger.log_message_parser', '@config.factory']
+    tags:
+      - { name: logger }
+  hello_world.config_overrider:
+    class: \Drupal\hello_world\HelloWorldConfigOverrides
+    tags:
+      - { name: config.factory.override, priority: 5 }
