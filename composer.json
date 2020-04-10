@@ -23,7 +23,8 @@
     "drupal/admin_toolbar": "2.x-dev",
     "drupal/core-dev": "9.0.x-dev",
     "drush/drush": "^10",
-    "openeuropa/task-runner": "~1.0-beta2"
+    "openeuropa/task-runner": "~1.0-beta2",
+    "drupal/devel_entity_updates": "^3"
   },
   "repositories": [
     {
@@ -39,6 +40,11 @@
   "extra": {
     "composer-exit-on-patch-failure": true,
     "enable-patching": true,
+    "patches": {
+      "drupal/core": {
+        "https://www.drupal.org/project/drupal/issues/3126661": "https://www.drupal.org/files/issues/2020-04-11/3126661-7.patch"
+      }
+    },
     "installer-paths": {
       "build/core": ["type:drupal-core"],
       "build/modules/contrib/{$name}": ["type:drupal-module"],

@@ -9,6 +9,7 @@ drupal:
     user: "drupal"
     password: "drupal"
   post_install:
+    - "./vendor/bin/drush en devel_entity_updates -y"
     - "./vendor/bin/drush cr"
   settings:
     settings:
