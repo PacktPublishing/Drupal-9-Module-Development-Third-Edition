@@ -12,7 +12,7 @@ $ docker-compose exec php composer install
 $ docker-compose exec php ./vendor/bin/run drupal:site-install
 ```
 
-2. Go to [http://localhost:8080/build](http://localhost:8080/build) and you have a Drupal site running with the module and its dependencies!
+2. Go to [http://localhost:8080/build](http://localhost:8080/build) and you have a Drupal site running. To log in, use `admin` / `admin`.
 
 ## Modules
 

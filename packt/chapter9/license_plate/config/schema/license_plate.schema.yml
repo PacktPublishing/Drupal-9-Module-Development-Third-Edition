@@ -1,0 +1,50 @@
+field.storage_settings.license_plate:
+  type: mapping
+  label: 'License plate storage settings'
+  mapping:
+    number_max_length:
+      type: integer
+      label: 'Max length for the number'
+    code_max_length:
+      type: integer
+      label: 'Max length for the code'
+
+field.widget.settings.default_license_plate_widget:
+  type: mapping
+  label: 'Default license plate widget settings'
+  mapping:
+    number_size:
+      type: integer
+      label: 'Number size'
+    code_size:
+      type: integer
+      label: 'Code size'
+    fieldset_state:
+      type: string
+      label: 'The state of the fieldset which contains the two fields: open/closed'
+    placeholder:
+      type: mapping
+      label: 'The placeholders for the two fields'
+      mapping:
+        number:
+          type: string
+          label: 'The placeholder for the number field'
+        code:
+          type: string
+          label: 'The placeholder for the code field'
+
+field.formatter.settings.default_license_plate_formatter:
+  type: mapping
+  label: 'Default license plate formatter settings'
+  mapping:
+    concatenated:
+      type: boolean
+      label: 'Whether to concatenate the two fields into one single span tag'
+
+field.field_settings.license_plate_type:
+  type: mapping
+  label: 'License plate field settings'
+  mapping:
+    codes:
+      type: string
+      label: 'Codes'

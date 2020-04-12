@@ -1,0 +1,86 @@
+<?php
+
+/**
+ * @file
+ * Sports module install file.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function sports_schema() {
+  $schema = [];
+
+  $schema['teams'] = [
+    'description' => 'The table that holds team data.',
+    'fields' => [
+      'id' => [
+        'description' => 'The primary identifier.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'name' => [
+        'description' => 'The team name.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'description' => [
+        'description' => 'The team description.',
+        'type' => 'text',
+        'size' => 'normal',
+      ],
+      'location' => [
+        'description' => 'The team location.',
+        'type' => 'varchar',
+        'length' => 255,
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+
+  $schema['players'] = [
+    'description' => 'The table that holds player data.',
+    'fields' => [
+      'id' => [
+        'description' => 'The primary identifier.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'team_id' => [
+        'description' => 'The ID of the team it belongs to.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+      ],
+      'name' => [
+        'description' => 'The player name.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'data' => [
+        'description' => 'Arbitrary data about the player.',
+        'type' => 'blob',
+        'size' => 'big',
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+
+  return $schema;
+}
+
+/**
+ * Adds the "location" field to the teams table.
+ */
+function sports_update_9001(&$sandbox) {
+  $field = [
+    'description' => 'The team location.',
+    'type' => 'varchar',
+    'length' => 255,
+  ];
+  $schema = \Drupal::database()->schema();
+  $schema->addField('teams', 'location', $field);
+}

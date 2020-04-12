@@ -1,0 +1,7 @@
+sports.players:
+  path: '/players'
+  defaults:
+    _controller: '\Drupal\sports\Controller\SportsController::players'
+    _title: 'The players'
+  requirements:
+    _permission: 'access content'
