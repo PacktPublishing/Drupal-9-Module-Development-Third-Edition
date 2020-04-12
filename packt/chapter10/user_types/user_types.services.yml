@@ -1,0 +1,6 @@
+services:
+  user_types.access_checker:
+    class: \Drupal\user_types\Access\UserTypesAccess
+    arguments: ['@entity_type.manager']
+    tags:
+      - { name: access_check, applies_to: _user_types_access_check }
