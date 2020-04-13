@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * License plate module file.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function license_plate_theme($existing, $type, $theme, $path) {
+  return [
+    'license_plate' => [
+      'variables' => ['code' => NULL, 'number' => NULL, 'concatenated' => TRUE],
+    ],
+  ];
+}
