@@ -2,7 +2,7 @@
 
 namespace Drupal\products\Plugin\Importer;
 
-use Drupal\products\Plugin\importerBase;
+use Drupal\products\Plugin\ImporterBase;
 
 /**
  * Product importer from a JSON format.
@@ -12,7 +12,7 @@ use Drupal\products\Plugin\importerBase;
  *   label = @Translation("JSON Importer")
  * )
  */
-class JsonImporter extends importerBase {
+class JsonImporter extends ImporterBase {
 
   /**
    * {@inheritdoc}
