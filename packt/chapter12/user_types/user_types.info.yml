@@ -1,0 +1,4 @@
+name: User Types
+description: User Types module
+type: module
+core_version_requirement: ^9

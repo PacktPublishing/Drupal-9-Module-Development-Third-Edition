@@ -1,0 +1,8 @@
+hello_world_clock:
+  version: 1.x
+  js:
+    js/hello_world_clock.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/jquery.once

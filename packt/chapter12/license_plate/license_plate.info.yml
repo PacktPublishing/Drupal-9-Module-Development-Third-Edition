@@ -1,0 +1,4 @@
+name: License Plate
+description: Holds the custom license plate field
+core_version_requirement: ^9
+type: module
