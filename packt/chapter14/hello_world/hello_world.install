@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * @file
+ * Hello World install file.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function hello_world_install($is_syncing) {
+  if ($is_syncing) {
+    return;
+  }
+
+  $config = \Drupal::configFactory()->getEditable('system.mail');
+  $mail_plugins = $config->get('interface');
+  if (in_array('hello_world', array_keys($mail_plugins))) {
+    return;
+  }
+
+  $mail_plugins['hello_world'] = 'hello_world_mail';
+  // $config->set('interface', $mail_plugins)->save();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function hello_world_uninstall($is_syncing) {
+  if ($is_syncing) {
+    return;
+  }
+
+  $config = \Drupal::configFactory()->getEditable('system.mail');
+  $mail_plugins = $config->get('interface');
+  if (!in_array('hello_world', array_keys($mail_plugins))) {
+    return;
+  }
+
+  unset($mail_plugins['hello_world']);
+  $config->set('interface', $mail_plugins)->save();
+}

@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Sports module file.
+ */
+
+/**
+ * Implements hook_cron().
+ */
+function sports_cron() {
+  // With this approach, each cron run has to run the query to check if there
+  // are any teams without players and then delete them. If the cron runs often,
+  // most of the times there will be nothing to delete and we run this query for
+  // no reason. Perhaps a better way is using a queue.
+  $database = \Drupal::database();
+  $result = $database->query("SELECT [id] FROM {teams} WHERE [id] NOT IN (SELECT [team_id] FROM {players} WHERE [team_id] IS NOT NULL)")->fetchAllAssoc('id');
+  if (!$result) {
+    return;
+  }
+
+  $ids = array_keys($result);
+  $database->delete('teams')
+    ->condition('id', $ids, 'IN')
+    ->execute();
+}

@@ -1,0 +1,45 @@
+user_types.board_members:
+  path: '/board-member'
+  defaults:
+    _controller: '\Drupal\user_types\Controller\UserTypesController::boardMember'
+    _title: 'Board member'
+  requirements:
+    _user_types_access_check: 'TRUE'
+  options:
+    _user_types:
+      - board_member
+
+user_types.manager:
+  path: '/manager'
+  defaults:
+    _controller: '\Drupal\user_types\Controller\UserTypesController::manager'
+    _title: 'Manager'
+  requirements:
+    _user_types_access_check: 'TRUE'
+  options:
+    _user_types:
+      - manager
+
+user_types.employee:
+  path: '/employee'
+  defaults:
+    _controller: '\Drupal\user_types\Controller\UserTypesController::employee'
+    _title: 'Employee'
+  requirements:
+    _user_types_access_check: 'TRUE'
+  options:
+    _user_types:
+      - manager
+      - employee
+
+user_types.leadership:
+  path: '/leadership'
+  defaults:
+    _controller: '\Drupal\user_types\Controller\UserTypesController::leadership'
+    _title: 'Leadership'
+  requirements:
+    _user_types_access_check: 'TRUE'
+  options:
+    _user_types:
+      - board_member
+      - manager
