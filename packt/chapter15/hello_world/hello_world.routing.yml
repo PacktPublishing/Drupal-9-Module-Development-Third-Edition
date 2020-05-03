@@ -1,0 +1,20 @@
+hello_world.hello:
+  path: '/hello'
+  defaults:
+    _controller: \Drupal\hello_world\Controller\HelloWorldController::helloWorld
+    _title: 'Our first route'
+  requirements:
+    _hello_world_access_check: 'TRUE'
+hello_world.greeting_form:
+  path: '/admin/config/salutation-configuration'
+  defaults:
+    _form: Drupal\hello_world\Form\SalutationConfigurationForm
+    _title: 'Salutation configuration'
+  requirements:
+    _permission: 'administer site configuration'
+hello_world.hide_block:
+  path: '/hide-block'
+  defaults:
+    _controller: \Drupal\hello_world\Controller\HelloWorldController::hideBlock
+  requirements:
+    _permission: 'access content'

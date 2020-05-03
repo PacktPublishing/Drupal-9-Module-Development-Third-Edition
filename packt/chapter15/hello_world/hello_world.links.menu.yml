@@ -1,0 +1,6 @@
+hello_world.hello:
+  title: 'Hello'
+  description: 'Get your dynamic salutation.'
+  route_name: hello_world.hello
+  menu_name: main
+  weight: 0
