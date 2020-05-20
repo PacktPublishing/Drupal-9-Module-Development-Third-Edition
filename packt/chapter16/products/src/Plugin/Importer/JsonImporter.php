@@ -5,6 +5,8 @@ namespace Drupal\products\Plugin\Importer;
 use Drupal\products\Plugin\ImporterBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Batch\BatchBuilder;
+use Drupal\products\Entity\ProductInterface;
+use Drupal\Core\File\FileSystemInterface;
 
 /**
  * Product importer from a JSON format.
@@ -109,6 +111,7 @@ class JsonImporter extends ImporterBase {
       $product = $this->entityTypeManager->getStorage('product')->create($values);
       $product->setName($data->name);
       $product->setProductNumber($data->number);
+      $this->handleProductImage($data, $product);
       $product->save();
       return;
     }
@@ -121,7 +124,35 @@ class JsonImporter extends ImporterBase {
     $product = reset($existing);
     $product->setName($data->name);
     $product->setProductNumber($data->number);
+    $this->handleProductImage($data, $product);
     $product->save();
+  }
+
+  /**
+   * Imports the image of the product and adds it to the Product entity.
+   *
+   * @param object $data
+   *   The product data.
+   * @param \Drupal\products\Entity\ProductInterface $product
+   *   The product entity.
+   */
+  protected function handleProductImage($data, ProductInterface $product) {
+    $name = $data->image;
+    // This needs to be hardcoded for the moment.
+    $image = file_get_contents('products://' . $name);
+    if (!$image) {
+      // Perhaps log something.
+      return;
+    }
+
+    /** @var \Drupal\file\FileInterface $file */
+    $file = file_save_data($image, 'public://product_images/' . $name, FileSystemInterface::EXISTS_REPLACE);
+    if (!$file) {
+      // Something went wrong, perhaps log it.
+      return;
+    }
+
+    $product->setImage($file->id());
   }
 
   /**
@@ -132,7 +163,7 @@ class JsonImporter extends ImporterBase {
    * @param object $context
    *   The context.
    */
-  public function clearMissing(array $products, &$context) {
+  public function clearMissing(array $products, object &$context) {
     if (!isset($context['results']['cleared'])) {
       $context['results']['cleared'] = [];
     }

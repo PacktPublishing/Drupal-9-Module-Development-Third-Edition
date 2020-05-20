@@ -1,0 +1,9 @@
+services:
+  products.importer_manager:
+    class: Drupal\products\Plugin\ImporterManager
+    parent: default_plugin_manager
+    arguments: ['@entity_type.manager']
+  products.images_stream_wrapper:
+    class: Drupal\products\StreamWrapper\ProductsStreamWrapper
+    tags:
+      - { name: stream_wrapper, scheme: products }

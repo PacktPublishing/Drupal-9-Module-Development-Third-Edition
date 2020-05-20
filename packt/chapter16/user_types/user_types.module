@@ -1,0 +1,107 @@
+<?php
+
+/**
+ * @file
+ * User Types module file.
+ */
+
+use Drupal\Core\Session\AccountInterface;
+use Drupal\node\NodeInterface;
+
+/**
+ * Returns the access grant ID for a given user type.
+ *
+ * @param string $type
+ *   The user type.
+ *
+ * @return int
+ *   The grant ID.
+ */
+function user_types_grant_mapping($type) {
+  $map = [
+    'employee' => 1,
+    'manager' => 2,
+    'board_member' => 3,
+  ];
+
+  if (!isset($map[$type])) {
+    throw new \InvalidArgumentException('Wrong user type provided');
+  }
+
+  return $map[$type];
+}
+
+/**
+ * Implements hook_node_access_records().
+ */
+function user_types_node_access_records(NodeInterface $node) {
+  $bundles = ['article', 'page'];
+  if (!in_array($node->bundle(), $bundles)) {
+    return [];
+  }
+
+  $view_map = [
+    'article' => [
+      'employee',
+      'manager',
+      'board_member',
+    ],
+    'page' => [
+      'manager',
+      'board_member',
+    ],
+  ];
+
+  if (!$node->isPublished()) {
+    unset($view_map['article'][0]);
+  }
+
+  $manage_map = [
+    'article' => [
+      'manager',
+    ],
+    'page' => [
+      'manager',
+    ],
+  ];
+
+  $user_types = $view_map[$node->bundle()];
+  $manage_user_types = $manage_map[$node->bundle()];
+  $grants = [];
+
+  foreach ($user_types as $user_type) {
+    $grants[] = [
+      'realm' => 'user_type',
+      'gid' => user_types_grant_mapping($user_type),
+      'grant_view' => 1,
+      'grant_update' => in_array($user_type, $manage_user_types) ? 1 : 0,
+      'grant_delete' => in_array($user_type, $manage_user_types) ? 1 : 0,
+    ];
+  }
+
+  return $grants;
+}
+
+/**
+ * Implements hook_node_grants().
+ */
+function user_types_node_grants(AccountInterface $account, $op) {
+  if ($account->isAnonymous()) {
+    return [];
+  }
+
+  $user = \Drupal::entityTypeManager()->getStorage('user')->load($account->id());
+  $user_type = $user->get('field_user_type')->value;
+  if (!$user_type) {
+    return [];
+  }
+
+  try {
+    $gid = user_types_grant_mapping($user_type);
+  }
+  catch (InvalidArgumentException $e) {
+    return [];
+  }
+
+  return ['user_type' => [$gid]];
+}

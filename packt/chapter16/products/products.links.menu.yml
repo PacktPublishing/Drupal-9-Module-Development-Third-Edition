@@ -1,0 +1,20 @@
+entity.product.collection:
+  title: 'Product list'
+  route_name: entity.product.collection
+  description: 'List Product entities'
+  parent: system.admin_structure
+  weight: 100
+
+entity.importer.collection:
+  title: 'Importer list'
+  route_name: entity.importer.collection
+  description: 'List Importer entities'
+  parent: system.admin_structure
+  weight: 99
+
+entity.product_type.collection:
+  title: 'Product types'
+  route_name: entity.product_type.collection
+  description: 'List Product bundles'
+  parent: system.admin_structure
+  weight: 99

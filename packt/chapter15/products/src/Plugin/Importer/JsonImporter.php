@@ -132,7 +132,7 @@ class JsonImporter extends ImporterBase {
    * @param array $context
    *   The context.
    */
-  public function clearMissing(array $products, array &$context) {
+  public function clearMissing(array $products, &$context) {
     if (!isset($context['results']['cleared'])) {
       $context['results']['cleared'] = [];
     }
@@ -169,10 +169,10 @@ class JsonImporter extends ImporterBase {
    *
    * @param array $products
    *   The products.
-   * @param array $context
+   * @param object $context
    *   The context.
    */
-  public function importProducts(array $products, array &$context) {
+  public function importProducts(array $products, &$context) {
     if (!isset($context['results']['imported'])) {
       $context['results']['imported'] = [];
     }
