@@ -1,0 +1,67 @@
+<?php
+
+/**
+ * @file
+ * Products module file.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert() for the Importer config entity type.
+ */
+function products_importer_insert(EntityInterface $entity) {
+  if ($entity->getPluginId() !== 'csv') {
+    return;
+  }
+
+  // Mark the current File as being used.
+  $fid = _products_importer_get_fid_from_entity($entity);
+  $file = Drupal::entityTypeManager()->getStorage('file')->load($fid);
+  \Drupal::service('file.usage')->add($file, 'products', 'config:importer', $entity->id());
+}
+
+/**
+ * Return the File ID of the CSV file used on an Importer.
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ *   The importer.
+ *
+ * @return int
+ *   The file ID.
+ */
+function _products_importer_get_fid_from_entity(EntityInterface $entity) {
+  $fids = $entity->getPluginConfiguration()['file'];
+  $fid = reset($fids);
+  return $fid;
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete() for the Importer config entity type.
+ */
+function products_importer_delete(EntityInterface $entity) {
+  if ($entity->getPluginId() !== 'csv') {
+    return;
+  }
+
+  $fid = _products_importer_get_fid_from_entity($entity);
+  $file = Drupal::entityTypeManager()->getStorage('file')->load($fid);
+  \Drupal::service('file.usage')->delete($file, 'products', 'config:importer', $entity->id());
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update() for the Importer config entity type.
+ */
+function products_importer_update(EntityInterface $entity) {
+  if ($entity->getPluginId() !== 'csv') {
+    return;
+  }
+
+  /** @var \Drupal\products\Entity\ImporterInterface $original */
+  $original = $entity->original;
+  $original_fid = _products_importer_get_fid_from_entity($original);
+  if ($original_fid !== _products_importer_get_fid_from_entity($entity)) {
+    $original_file = Drupal::entityTypeManager()->getStorage('file')->load($original_fid);
+    \Drupal::service('file.usage')->delete($original_file, 'products', 'config:importer', $entity->id());
+  }
+}

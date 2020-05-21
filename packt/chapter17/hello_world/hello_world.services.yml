@@ -1,0 +1,33 @@
+services:
+  hello_world.salutation:
+    class: Drupal\hello_world\HelloWorldSalutation
+    arguments: ['@config.factory', '@event_dispatcher', '@page_cache_kill_switch']
+  hello_world.redirect_subscriber:
+    class: \Drupal\hello_world\EventSubscriber\HelloWorldRedirectSubscriber
+    arguments: ['@current_user', '@current_route_match']
+    tags:
+      - { name: event_subscriber }
+  hello_world.logger.channel.hello_world:
+    parent: logger.channel_base
+    arguments: ['hello_world']
+  hello_world.logger.mail_logger:
+    class: Drupal\hello_world\Logger\MailLogger
+    arguments: ['@logger.log_message_parser', '@config.factory']
+    tags:
+      - { name: logger }
+  hello_world.config_overrider:
+    class: \Drupal\hello_world\HelloWorldConfigOverrides
+    tags:
+      - { name: config.factory.override, priority: 5 }
+  hello_world.access_checker:
+    class: \Drupal\hello_world\Access\HelloWorldAccess
+    arguments: ['@config.factory']
+    tags:
+      - { name: access_check, applies_to: _hello_world_access_check }
+  hello_world.route_subscriber:
+    class: Drupal\hello_world\Routing\HelloWorldRouteSubscriber
+    tags:
+      - { name: event_subscriber }
+  hello_world.lazy_builder:
+    class: Drupal\hello_world\HelloWorldLazyBuilder
+    arguments: ['@hello_world.salutation']

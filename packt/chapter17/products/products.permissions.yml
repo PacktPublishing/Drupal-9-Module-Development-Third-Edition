@@ -1,0 +1,8 @@
+view product entities:
+  title: 'View Product entities'
+edit product entities:
+  title: 'Edit Product entities'
+delete product entities:
+  title: 'Delete Product entities'
+add product entities:
+  title: 'Create new Product entities'

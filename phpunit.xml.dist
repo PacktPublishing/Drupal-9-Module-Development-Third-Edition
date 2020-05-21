@@ -22,5 +22,9 @@
       <directory>./tests/</directory>
       <directory>./packt/*/*/tests/</directory>
     </testsuite>
+    <testsuite name="functional-javascript">
+      <directory>./tests/</directory>
+      <directory>./packt/*/*/tests/</directory>
+    </testsuite>
   </testsuites>
 </phpunit>
