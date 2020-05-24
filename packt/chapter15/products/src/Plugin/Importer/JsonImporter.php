@@ -129,7 +129,7 @@ class JsonImporter extends ImporterBase {
    *
    * @param array $products
    *   The products.
-   * @param array $context
+   * @param object $context
    *   The context.
    */
   public function clearMissing(array $products, &$context) {
