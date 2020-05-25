@@ -42,7 +42,7 @@
     "enable-patching": true,
     "patches": {
       "drupal/core": {
-        "https://www.drupal.org/project/drupal/issues/3126661": "https://www.drupal.org/files/issues/2020-04-11/3126661-7.patch"
+        "https://www.drupal.org/project/drupal/issues/3126661": "https://www.drupal.org/files/issues/2020-05-25/3126661-12.patch"
       }
     },
     "installer-paths": {
