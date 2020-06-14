@@ -13,7 +13,7 @@
     }
   ],
   "require": {
-    "drupal/core-recommended": "9.0.x-dev"
+    "drupal/core-recommended": "^9.0"
   },
   "require-dev": {
     "composer/installers": "^1.2",
@@ -21,7 +21,7 @@
     "dealerdirect/phpcodesniffer-composer-installer": "^0.6.2",
     "drupal-composer/drupal-scaffold": "^2.2",
     "drupal/admin_toolbar": "2.x-dev",
-    "drupal/core-dev": "9.0.x-dev",
+    "drupal/core-dev": "^9.0",
     "drush/drush": "^10",
     "openeuropa/task-runner": "~1.0-beta2",
     "drupal/devel_entity_updates": "^3"
@@ -42,7 +42,7 @@
     "enable-patching": true,
     "patches": {
       "drupal/core": {
-        "https://www.drupal.org/project/drupal/issues/3126661": "https://www.drupal.org/files/issues/2020-05-25/3126661-12.patch"
+        "https://www.drupal.org/project/drupal/issues/3126661": "https://www.drupal.org/files/issues/2020-05-26/3126661-14.patch"
       }
     },
     "installer-paths": {
