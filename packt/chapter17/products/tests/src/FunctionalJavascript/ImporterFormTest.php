@@ -108,7 +108,7 @@ class ImporterFormTest extends WebDriverTestBase {
     $assert->fieldValueEquals('plugin', 'csv');
     $assert->checkboxChecked('update_existing');
     $assert->fieldValueEquals('source', 'testing');
-    $page->hasLink('products.csv');
+    $assert->linkExists('simpletest-products_0.csv');
     $assert->fieldValueEquals('bundle', 'Goods (goods)');
   }
 
