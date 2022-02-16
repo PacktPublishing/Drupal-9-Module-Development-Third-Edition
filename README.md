@@ -105,6 +105,7 @@ $ docker-compose exec php ./vendor/bin/run drupal:phpcbf
 ## Errata
 * Page 43 (Custom submit handler code snippet): **'hello_world_salutation_configuration_form_submit';** _should be_ **'my_module_salutation_configuration_form_submit';**
 * Page 147 (code snippet): **\Drupal\user\UsedDataInterface** _should be_ **\Drupal\user\UserDataInterface**
+* Page 204 ( 1st code snippet line 5): **$nid->addPropertyConstraints('value', ['Range' => ['mn' => 5, 'max' => 10]]);** _should be_ **$nid->addPropertyConstraints('value', ['Range' => ['min' => 5, 'max' => 10]]);**
 
 ### Related products <Other books you may enjoy>
 * WordPress 5 Cookbook [[Packt]](https://www.packtpub.com/business-other/wordpress-5-cookbook?utm_source=github&utm_medium=repository&utm_campaign=9781838986506) [[Amazon]](https://www.amazon.com/dp/1838986502)
