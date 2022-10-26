@@ -115,3 +115,7 @@ $ docker-compose exec php ./vendor/bin/run drupal:phpcbf
 ## Get to Know the Author
 **Daniel Sipos**
 is a senior web developer specializing in Drupal. He's been working with Drupal sites since version 6, and started out, like many others, as a site builder. He's a self-taught programmer with many years' experience working professionally on complex Drupal 7 and 8 projects. In his spare time, he runs webomelette.com, a Drupal website where he writes technical articles, tips, and techniques related to Drupal development.
+### Download a free PDF
+
+ <i>If you have already purchased a print or Kindle version of this book, you can get a DRM-free PDF version at no cost.<br>Simply click on the link to claim your free PDF.</i>
+<p align="center"> <a href="https://packt.link/free-ebook/9781800204621">https://packt.link/free-ebook/9781800204621 </a> </p>
